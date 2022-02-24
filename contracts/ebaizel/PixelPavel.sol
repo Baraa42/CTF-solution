@@ -1,0 +1,52 @@
+// // SPDX-License-Identifier: UNLICENSED
+// //pragma solidity >=0.7.6;
+
+// /*
+//   The nefarious Pixel Pavel has struck again! This time exploiting a DeFi
+//   protocol and draining 298 Wei. Interpol does not know his whereabouts but
+//   they have identified this contract as where he is keeping his funds.
+
+//   After scouring StackOverflow and many Discord channels, they were still
+//   unable to crack the code and retrieve the funds. So, now they have
+//   reached out to you, Esther Von Munchen, as their last hope to retrieve
+//   the funds.
+
+//   Be sharp, be patient, and those 298 Wei will return to their rightful owner.
+
+//   Good luck!
+// */
+
+// // balance = 298 wei
+// // 298 = 42 + 256
+// contract PixelPavel {
+//     uint8 public constant smallPrizeAnswer = 42;
+//     uint256 public constant bigPrizeWinningAnswer = 298;
+
+//     constructor() payable {
+//         require(
+//             msg.value == bigPrizeWinningAnswer,
+//             "Gotta pay to play, 298 Wei."
+//         );
+//     }
+
+//     function crackCode(uint8 _smallAnswer) external {
+//         require(_smallAnswer == smallPrizeAnswer, "Answer must equal 42."); // uint8 = 256 _smallAnswer = 42
+
+//         // Well done! You won the small prize. Now let's try for the big kahuna.
+//         (bytes32 sig, bytes32 data) = abi.decode(
+//             abi.encodePacked(bytes28(0), msg.data),
+//             (bytes32, bytes32)
+//         );
+//         // we need data = 298
+//         // first check abi.encodePacked(bytes28(0), something)
+//         // then see how to pass msg.data with a transaction
+//         if (
+//             keccak256(abi.encode(bigPrizeWinningAnswer)) ==
+//             keccak256(abi.encode(data))
+//         ) {
+//             uint256 amount = address(this).balance;
+//             (bool success, ) = payable(tx.origin).call{value: amount}("");
+//             require(success, "Failed to send Ether");
+//         }
+//     }
+// }
